@@ -347,7 +347,7 @@ static TCB* sched_queue_select(TCB* current)
 {	
 	i=0;
 	/* Get the head of the SCHED list */
-	rlnode* sel = rlist_pop_front(&SCHED[i);
+	rlnode* sel = rlist_pop_front(&SCHED[i]);
 
 	TCB* next_thread = sel->tcb; /* When the list is empty, this is NULL */
 		
