@@ -443,6 +443,7 @@ void yield(enum SCHED_CAUSE cause)
 	TCB* current = CURTHREAD; /* Make a local copy of current process, for speed */
 
 	Mutex_Lock(&sched_spinlock);
+	b_count--;
 
 	/* Update CURTHREAD state */
 	if (current->state == RUNNING)
@@ -567,9 +568,11 @@ static void idle_thread()
   Initialize the scheduler queue
  */
 void initialize_scheduler()
-{
-	rlnode_init(&SCHED, NULL);
-	rlnode_init(&TIMEOUT_LIST, NULL);
+{		
+	for(int i=0; i<NUM_OF_QUEUES; i++){
+		rlnode_init(&SCHED[i], NULL);
+		rlnode_init(&TIMEOUT_LIST, NULL);
+		}
 }
 
 void run_scheduler()
